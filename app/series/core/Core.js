@@ -135,7 +135,7 @@ define(["esri/map",
 				mapOptions: {
 					extent: getExtent(),
 					maxZoom: 5,
-					minZoom: getMinZoom(app.maps.length),
+					minZoom: 1,
 					infoWindow: popup
 				}
 			});
