@@ -19,11 +19,11 @@ define([],
 			//Enter a title, if no title is specified, the webmap's title is used.
 			title: "Smithsonian energy proto-story",
 			//Enter a subtitle, if not specified the ArcGIS.com web map's summary is used
-			subtitle: "",
+			subtitle: "Subtitle summarizing the essence of the story",
 			//Sync maps scale and location
 			syncMaps: true,
 			//Display geocoder search widget
-			geocoderWidget: false,
+			geocoderWidget: true,
 			// Specify a proxy for custom deployment
 			proxyurl: "",
 			//specify the url to a geometry service
