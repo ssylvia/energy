@@ -106,6 +106,16 @@ define(["esri/map",
 			responsiveLayout();
 		}
 
+		function getMinZoom(index)
+		{
+			if(index === 2){
+				return 1;
+			}
+			else{
+				return 2;
+			}
+		}
+
 		function loadMaps()
 		{
 			$("#map-pane").append('<div id="map'+app.maps.length+'" class="map"></div>');
@@ -124,6 +134,8 @@ define(["esri/map",
 			var mapDeferred = esri.arcgis.utils.createMap(configOptions.webmaps[app.maps.length].id,"map"+app.maps.length,{
 				mapOptions: {
 					extent: getExtent(),
+					maxZoom: 5,
+					minZoom: getMinZoom(app.maps.length),
 					infoWindow: popup
 				}
 			});
@@ -134,6 +146,19 @@ define(["esri/map",
 				map.itemData = {
 					title: configOptions.webmaps[app.maps.length].title || response.itemInfo.item.title || "",
 					description: response.itemInfo.item.description || ""
+				}
+
+				if(app.maps.length === 0){
+					map.PopupURL = "http://services.arcgis.com/nzS0F0zdNLvs7nc8/arcgis/rest/services/Per_capita_electricity_consumption/FeatureServer/0";
+					map.PopupLayerId = "Per_capita_electricity_consumption_2197";
+				}
+				else if(app.maps.length === 1){
+					map.PopupURL = "http://services.arcgis.com/nzS0F0zdNLvs7nc8/arcgis/rest/services/Renewable_electricity_production/FeatureServer/0";
+					map.PopupLayerId = "Renewable_electricity_production_8779";
+				}
+				else{
+					map.PopupURL = "http://services.arcgis.com/nzS0F0zdNLvs7nc8/arcgis/rest/services/Percent_renewable_electricity/FeatureServer/0";
+					map.PopupLayerId = "Percent_renewable_electricity_6440"
 				}
 
 				app.maps.push(map);
@@ -230,6 +255,28 @@ define(["esri/map",
 					map: map
 				},map.container.id+'geocoder');
 				geocoder.startup();
+
+				dojo.connect(geocoder,"onFindResults",function(response){
+					geocoder.map.infoWindow.hide();
+
+					var geo = response.results[0].extent.getCenter();
+					
+					var queryTask = new esri.tasks.QueryTask(geocoder.map.PopupURL);
+					var query = new esri.tasks.Query();
+						query.geometry = geo;
+						query.returnGeometry = true;
+						query.outFields = ["*"];
+
+					queryTask.execute(query,function(response){
+						if (response.features.length > 0){
+							dojo.forEach(response.features,function(ftr){
+								ftr.setInfoTemplate(geocoder.map.getLayer(geocoder.map.PopupLayerId).infoTemplate);
+							});
+							geocoder.map.infoWindow.setFeatures(response.features);
+							geocoder.map.infoWindow.show(geo);
+						}
+					});
+				});
 			}
 
 			//ADD LEGEND
