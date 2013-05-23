@@ -92,6 +92,10 @@
 	z-index: 30;
 }
 
+#legend0_Per_capita_electricity_consumption_9723_0, #legend1_Renewable_electricity_production_hostedtiles_1964_0, #legend2_Percent_renewable_electricity_hostedtiles_724_0{
+	margin-top: 10px;
+}
+
 b{
 	font-weight: bold;
 }

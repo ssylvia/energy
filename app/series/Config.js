@@ -17,9 +17,9 @@ define([],
 				title: ""
 			}],
 			//Enter a title, if no title is specified, the webmap's title is used.
-			title: "Smithsonian energy proto-story",
+			title: "Interactive: Mapping Renewable Energy Around the World",
 			//Enter a subtitle, if not specified the ArcGIS.com web map's summary is used
-			subtitle: "Subtitle summarizing the essence of the story",
+			subtitle: "Which countries are leading the way in transitioning away from fossil fuels?",
 			//Sync maps scale and location
 			syncMaps: true,
 			//Display geocoder search widget
