@@ -96,8 +96,14 @@
 	margin-top: 10px;
 }
 
-b{
-	font-weight: bold;
+.legend{
+	padding: 15px 15px 0 15px;
+}
+
+#source-holder{
+	font-size: 12px;
+	line-height: 1.2;
+	padding: 0 15px 15px 15px;
 }
 
 /* Custom Webkit Scrollbar */
@@ -126,6 +132,10 @@ b{
 }
 
 @media all and (max-width: 780px) {
+	#title{
+		height: auto;
+	}
+	
 	#side-pane{
 		display: none;
 		position: absolute;
@@ -167,5 +177,8 @@ b{
 		padding: 15px;
 		max-height: 150px;
 		overflow: auto;
+	}
+	#source-holder{
+		padding: 15px;
 	}
 }

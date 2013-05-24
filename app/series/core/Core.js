@@ -119,7 +119,7 @@ define(["esri/map",
 		function loadMaps()
 		{
 			$("#map-pane").append('<div id="map'+app.maps.length+'" class="map"></div>');
-			$("#legend-pane").append('<div id="legend'+app.maps.length+'" class="legend"></div>');
+			$("#legend-holder").append('<div id="legend'+app.maps.length+'" class="legend"></div>');
 			$("#mobile-popup").append('<div class="mobile-popup-content"></div>');
 			$(".map").last().fadeTo(0,0);
 
